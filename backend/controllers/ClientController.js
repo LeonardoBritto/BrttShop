@@ -99,8 +99,8 @@ module.exports = class ClientController {
 
     static async getById(req, res) {
         const id = req.params.id
-        console.log(id)
-        const clientExist = await Client.findByPk(id, {attributes: {exclude: ['password']}})
+        
+        const clientExist = await Client.findByPk(id, {attributes: {exclude: ['password', 'createdAt', 'updatedAt']}})
 
         if(!clientExist)
             return res.status(400).json({message: 'Client not found!'})    
@@ -109,7 +109,7 @@ module.exports = class ClientController {
     }
 
     static async getAll(req, res) {
-        const clients =  await Client.findAll({attributes: {exclude: ['password']}})
+        const clients =  await Client.findAll({attributes: {exclude: ['password', 'createdAt', 'updatedAt']}})
 
         if(clients.length === 0)
             return res.status(400).json({message: 'There are no customers in the base'}) 

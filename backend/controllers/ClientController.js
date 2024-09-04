@@ -97,6 +97,24 @@ module.exports = class ClientController {
         await createTokenClient(clientExist, req, res)
     }
 
+    static async addBalance(req, res) {
+        const {balance} = req.body
+        const id = req.params.id
+
+        const clientE = await Client.findByPk(id)
+
+        const currentbalance = parseFloat(balance) + parseFloat(clientE.balance)
+
+        try {
+            const client = {balance: currentbalance}
+            console.log(currentbalance)
+            await Client.update(client, {where: {id: id}})
+            res.status(201).json({message: 'Balance added successfully!'}) 
+        } catch (error) {
+            res.status(500).json({message: 'Erro' + error})     
+        }
+    }
+
     static async getById(req, res) {
         const id = req.params.id
         

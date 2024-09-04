@@ -8,6 +8,7 @@ router.post('/create',          ClientController.create)
 router.patch('/update/:id',     verifyToken,    ClientController.update)
 router.delete('/delete/:id',    verifyToken, ClientController.delete)
 router.post('/login',           ClientController.login)
+router.post('/addbalance/:id',      verifyToken, ClientController.addBalance)
 router.get('/:id',              verifyToken, ClientController.getById)
 router.get('/',                 verifyToken, ClientController.getAll)
 
